@@ -26,7 +26,11 @@ import bisect
 import logging
 import networkx
 
-from Queue import Queue
+#py3/py2: module name changed.
+try:
+    from queue import Queue
+except ImportError:
+    from Queue import Queue
 
 from pydot import Dot
 from pydot import Edge
