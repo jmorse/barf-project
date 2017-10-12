@@ -34,6 +34,7 @@ This algorithm is architecture agnostic since it operates on the IR
 representation of the underlying assembly code.
 """
 
+from functools import reduce
 import logging
 
 import barf.core.smt.smtfunction as smtfunction
