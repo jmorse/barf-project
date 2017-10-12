@@ -45,7 +45,7 @@ from barf.core.reil import ReilRegisterOperand
 
 # For python2, use xrange as range; python3 only has range anyway.
 if sys.version_info[0] < 3:
-    import xrange as range
+    range = xrange
 
 class GadgetFinder(object):
 
