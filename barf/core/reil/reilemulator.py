@@ -606,7 +606,7 @@ class ReilCpu(object):
         else:
             op1_tmp = op1_val
 
-        result_tmp = op0_tmp / op1_tmp
+        result_tmp = op0_tmp // op1_tmp
 
         if result_sign == 0x1:
             result = twos_complement(result_tmp, result_size)
@@ -629,7 +629,7 @@ class ReilCpu(object):
             ReilMnemonic.ADD: lambda a, b: a + b,
             ReilMnemonic.SUB: lambda a, b: a - b,
             ReilMnemonic.MUL: lambda a, b: a * b,  # unsigned multiplication
-            ReilMnemonic.DIV: lambda a, b: a / b,  # unsigned division
+            ReilMnemonic.DIV: lambda a, b: a // b,  # unsigned division
             ReilMnemonic.MOD: lambda a, b: a % b,  # unsigned modulo
 
             ReilMnemonic.AND: lambda a, b: a & b,
@@ -665,7 +665,7 @@ class ReilCpu(object):
         # Memory address.
         op0_val = self.read_operand(instr.operands[0])
         # Data.
-        op2_val = self.read_memory(op0_val, instr.operands[2].size / 8)
+        op2_val = self.read_memory(op0_val, instr.operands[2].size // 8)
 
         self.write_operand(instr.operands[2], op2_val)
 
@@ -682,7 +682,7 @@ class ReilCpu(object):
 
         op0_size = instr.operands[0].size
 
-        self.write_memory(op2_val, op0_size / 8, op0_val)
+        self.write_memory(op2_val, op0_size // 8, op0_val)
 
         return None
 
@@ -895,7 +895,7 @@ class ReilEmulatorTainter(object):
         op0_val = self.__emu.read_operand(instr.operands[0])
 
         # Get taint information.
-        op0_taint = self.get_memory_taint(op0_val, instr.operands[2].size / 8)
+        op0_taint = self.get_memory_taint(op0_val, instr.operands[2].size // 8)
 
         # Propagate taint.
         self.set_operand_taint(instr.operands[2], op0_taint)
@@ -911,7 +911,7 @@ class ReilEmulatorTainter(object):
         op0_taint = self.get_operand_taint(instr.operands[0])
 
         # Propagate taint.
-        self.set_memory_taint(op2_val, op0_size / 8, op0_taint)
+        self.set_memory_taint(op2_val, op0_size // 8, op0_taint)
 
     def __taint_move(self, instr):
         """Taint registers move instruction.
