@@ -23,12 +23,16 @@
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import logging
+import sys
 
 import barf.core.smt.smtfunction as smtfunction
 import barf.core.smt.smtsymbol as smtsymbol
 
 from barf.core.reil import ReilImmediateOperand
 from barf.core.reil import ReilRegisterOperand
+
+if sys.version_info[0] < 3:
+    range = xrange
 
 logger = logging.getLogger(__name__)
 
@@ -99,7 +103,7 @@ class CodeAnalyzer(object):
         """
         mem = self.get_memory(mode)
 
-        return smtfunction.concat(8, *reversed([mem[address + i] for i in xrange(size)]))
+        return smtfunction.concat(8, *reversed([mem[address + i] for i in range(size)]))
 
     def get_memory(self, mode):
         """Return a smt bit vector that represents a memory location.
