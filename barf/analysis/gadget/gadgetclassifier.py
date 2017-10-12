@@ -36,6 +36,7 @@ representation of the underlying assembly code.
 """
 
 import random
+import sys
 
 from barf.analysis.gadget import GadgetType
 from barf.analysis.gadget import TypedGadget
@@ -43,6 +44,8 @@ from barf.core.reil import ReilEmptyOperand
 from barf.core.reil import ReilImmediateOperand
 from barf.core.reil import ReilRegisterOperand
 
+if sys.version_info[0] < 3:
+    range = xrange
 
 class GadgetClassifier(object):
 
@@ -542,7 +545,7 @@ class GadgetClassifier(object):
         # Repeat classification.
         results = []
 
-        for _ in xrange(iters):
+        for _ in range(iters):
             # Reset emulator.
             self._ir_emulator.reset()
 
