@@ -552,6 +552,12 @@ class ArmImmediateOperand(ArmOperand):
         '_size',
     ]
 
+    # Account for differing native int/long types in py2/py3
+    import sys
+    valid_imm_types = [int]
+    if sys.version_info[0] < 3:
+        valid_imm_types.append(long)
+
     def __init__(self, immediate, size=None):
         super(ArmImmediateOperand, self).__init__("")
 
@@ -565,7 +571,7 @@ class ArmImmediateOperand(ArmOperand):
                 immediate = int(immediate)
                 self._base_hex = False
 
-        assert type(immediate) in [int, long], "Invalid immediate value type."
+        assert type(immediate) in self.valid_imm_types, "Invalid immediate value type."
 
         self._immediate = immediate
         self._size = size
