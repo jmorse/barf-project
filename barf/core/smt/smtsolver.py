@@ -88,6 +88,7 @@ class Z3Solver(object):
 
     def _read(self):
         response = self._process.stdout.readline()[:-1]
+        response = response.decode()
 
         logger.debug("< %s", response)
 
@@ -197,6 +198,7 @@ class CVC4Solver(object):
 
     def _read(self):
         response = self._process.stdout.readline()[:-1]
+        response = response.decode()
 
         logger.debug("< %s", response)
 
