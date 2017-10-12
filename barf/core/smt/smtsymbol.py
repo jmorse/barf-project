@@ -127,6 +127,10 @@ class BitVec(Symbol):
         return BitVec(self.size, "bvmul", self, _cast_to_bitvec(other, self.size))
 
     def __div__(self, other):
+        # Use // instead.
+        raise Exception("Performing true-division on SMT symbol")
+
+    def __floordiv__(self, other):
         return BitVec(self.size, "bvsdiv", self, _cast_to_bitvec(other, self.size))
 
     def __mod__(self, other):
@@ -239,9 +243,9 @@ class Constant(BitVec):
 
         # Format number, choose between binary and hexadecimal notation.
         if size < 8:
-            value_str = "#b{0:0{fill}b}".format(value, fill=size / 1)
+            value_str = "#b{0:0{fill}b}".format(value, fill=size // 1)
         else:
-            value_str = "#x{0:0{fill}x}".format(value, fill=size / 4)
+            value_str = "#x{0:0{fill}x}".format(value, fill=size // 4)
 
         return value_str
 

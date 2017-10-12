@@ -528,7 +528,7 @@ class SmtTranslator(object):
         exprs = []
 
         for i in reversed(range(0, oprnd3.size, 8)):
-            exprs += [self._mem_curr[op1_var + i / 8] == smtfunction.extract(op3_var, i, 8)]
+            exprs += [self._mem_curr[op1_var + i // 8] == smtfunction.extract(op3_var, i, 8)]
 
         return exprs + op3_var_constrs
 
@@ -542,7 +542,7 @@ class SmtTranslator(object):
         op3_var = self._translate_src_oprnd(oprnd3)
 
         for i in range(0, oprnd1.size, 8):
-            self._mem_curr[op3_var + i/8] = smtfunction.extract(op1_var, i, 8)
+            self._mem_curr[op3_var + i//8] = smtfunction.extract(op1_var, i, 8)
 
         # Memory versioning.
         self._mem_instance += 1
