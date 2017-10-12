@@ -648,10 +648,16 @@ class X86ImmediateOperand(X86Operand):
         '_immediate',
     ]
 
+    # Account for differing native int/long types in py2/py3
+    import sys
+    valid_imm_types = [int]
+    if sys.version_info[0] < 3:
+        valid_imm_types.append(long)
+
     def __init__(self, immediate, size=None):
         super(X86ImmediateOperand, self).__init__("")
 
-        assert type(immediate) in [int, long], "Invalid immediate value type."
+        assert type(immediate) in self.valid_imm_types, "Invalid immediate value type."
 
         self._immediate = immediate
         self._size = size
