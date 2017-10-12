@@ -82,7 +82,8 @@ class Z3Solver(object):
     def _write(self, command):
         logger.debug("> %s", command)
 
-        self._process.stdin.writelines(command + "\n")
+        command = "{}\n".format(command)
+        self._process.stdin.write(command.encode())
 
     def _read(self):
         response = self._process.stdout.readline()[:-1]
@@ -190,7 +191,8 @@ class CVC4Solver(object):
     def _write(self, command):
         logger.debug("> %s", command)
 
-        self._process.stdin.writelines(command + "\n")
+        command = "{}\n".format(command)
+        self._process.stdin.write(command.encode())
 
     def _read(self):
         response = self._process.stdout.readline()[:-1]
