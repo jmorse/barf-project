@@ -227,6 +227,9 @@ class ArmDisassembler(Disassembler):
     def _cs_disassemble_one(self, data, address):
         """Disassemble the data into an instruction in string form.
         """
+
+        assert type(data) is bytes
+
         disasm = list(self._disassembler.disasm(data, address))
 
         # TODO: Improve this check.
