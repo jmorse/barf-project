@@ -22,12 +22,12 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from gadget import GadgetType
-from gadget import RawGadget
-from gadget import TypedGadget
+from .gadget import GadgetType
+from .gadget import RawGadget
+from .gadget import TypedGadget
 
-from gadgetclassifier import GadgetClassifier
+from .gadgetclassifier import GadgetClassifier
 
-from gadgetfinder import GadgetFinder
+from .gadgetfinder import GadgetFinder
 
-from gadgetverifier import GadgetVerifier
+from .gadgetverifier import GadgetVerifier

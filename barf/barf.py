@@ -29,33 +29,33 @@ BARF : Binary Analysis Framework.
 import logging
 import pefile
 
-import arch
+from . import arch
 
-from analysis.basicblock import CFGRecoverer
-from analysis.basicblock import ControlFlowGraph
-from analysis.basicblock import RecursiveDescent
-from analysis.codeanalyzer import CodeAnalyzer
-from analysis.gadget import GadgetClassifier
-from analysis.gadget import GadgetFinder
-from analysis.gadget import GadgetVerifier
-from arch.arm.armbase import ArmArchitectureInformation
-from arch.arm.armdisassembler import ArmDisassembler
-from arch.arm.armtranslator import ArmTranslator
-from arch.x86.x86base import X86ArchitectureInformation
-from arch.x86.x86disassembler import X86Disassembler
-from arch.x86.x86translator import X86Translator
-from core.bi import BinaryFile
-from core.reil import ReilContainer
-from core.reil import ReilContainerInvalidAddressError
-from core.reil import ReilEmulator
-from core.reil import ReilSequence
-from core.smt.smtsolver import CVC4Solver, SmtSolverNotFound
-from core.smt.smtsolver import Z3Solver
-from core.smt.smttranslator import SmtTranslator
-from utils.utils import ExecutionCache
-from utils.utils import InvalidAddressError
-from utils.utils import to_asm_address
-from utils.utils import to_reil_address
+from .analysis.basicblock import CFGRecoverer
+from .analysis.basicblock import ControlFlowGraph
+from .analysis.basicblock import RecursiveDescent
+from .analysis.codeanalyzer import CodeAnalyzer
+from .analysis.gadget import GadgetClassifier
+from .analysis.gadget import GadgetFinder
+from .analysis.gadget import GadgetVerifier
+from .arch.arm.armbase import ArmArchitectureInformation
+from .arch.arm.armdisassembler import ArmDisassembler
+from .arch.arm.armtranslator import ArmTranslator
+from .arch.x86.x86base import X86ArchitectureInformation
+from .arch.x86.x86disassembler import X86Disassembler
+from .arch.x86.x86translator import X86Translator
+from .core.bi import BinaryFile
+from .core.reil import ReilContainer
+from .core.reil import ReilContainerInvalidAddressError
+from .core.reil import ReilEmulator
+from .core.reil import ReilSequence
+from .core.smt.smtsolver import CVC4Solver, SmtSolverNotFound
+from .core.smt.smtsolver import Z3Solver
+from .core.smt.smttranslator import SmtTranslator
+from .utils.utils import ExecutionCache
+from .utils.utils import InvalidAddressError
+from .utils.utils import to_asm_address
+from .utils.utils import to_reil_address
 
 from elftools.elf.elffile import ELFFile
 

@@ -24,11 +24,11 @@
 
 import logging
 
-from barf import BARF
+from .barf import BARF
 
-import analysis
-import core
-import arch
+from . import analysis
+from . import core
+from . import arch
 
 # Setup logging module.
 logging.basicConfig(

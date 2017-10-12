@@ -22,6 +22,6 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from reil import *
-from reilemulator import *
-from reilparser import *
+from .reil import *
+from .reilemulator import *
+from .reilparser import *
