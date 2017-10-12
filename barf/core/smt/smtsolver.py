@@ -84,6 +84,7 @@ class Z3Solver(object):
 
         command = "{}\n".format(command)
         self._process.stdin.write(command.encode())
+        self._process.stdin.flush()
 
     def _read(self):
         response = self._process.stdout.readline()[:-1]
