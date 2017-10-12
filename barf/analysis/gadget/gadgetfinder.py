@@ -32,6 +32,7 @@ agnostic.
 
 """
 import re
+import sys
 
 from barf.analysis.gadget import RawGadget
 from barf.arch import ARCH_ARM
@@ -42,6 +43,9 @@ from barf.core.reil import DualInstruction
 from barf.core.reil import ReilMnemonic
 from barf.core.reil import ReilRegisterOperand
 
+# For python2, use xrange as range; python3 only has range anyway.
+if sys.version_info[0] < 3:
+    import xrange as range
 
 class GadgetFinder(object):
 
@@ -98,7 +102,7 @@ class GadgetFinder(object):
         roots = []
 
         # find gadget tail
-        for addr in xrange(start_address, end_address + 1):
+        for addr in range(start_address, end_address + 1):
             # TODO: Make this 'speed improvement' architecture-agnostic
             op_codes = [
                 "\xc3",     # RET
@@ -187,7 +191,7 @@ class GadgetFinder(object):
         ]
 
         # find gadget tail
-        for addr in xrange(start_address, end_address + 1):
+        for addr in range(start_address, end_address + 1):
             # TODO: Make this 'speed improvement' architecture-agnostic
             # TODO: Add thumb
             # TODO: Little-Endian
@@ -296,7 +300,7 @@ class GadgetFinder(object):
         # gadgets = []
 
         # for node in node_list:
-        #     for i in xrange(len(node)):
+        #     for i in range(len(node)):
         #         gadgets.append(RawGadget(node[i:]))
 
         # return gadgets
