@@ -36,11 +36,15 @@ representation of the underlying assembly code.
 
 from functools import reduce
 import logging
+import sys
 
 import barf.core.smt.smtfunction as smtfunction
 
 from barf.analysis.gadget import GadgetType
 from barf.core.reil import ReilRegisterOperand
+
+if sys.version_info[0] < 3:
+    range = xrange
 
 logger = logging.getLogger("GadgetVerifier")
 
@@ -247,7 +251,7 @@ class GadgetVerifier(object):
 
         constrs = []
 
-        for i in reversed(xrange(0, size, 8)):
+        for i in reversed(range(0, size, 8)):
             bytes_exprs_1 = self.analyzer.get_memory_expr(addr + i/8, 8/8)
             bytes_exprs_2 = smtfunction.extract(dst, i, 8)
 
@@ -284,7 +288,7 @@ class GadgetVerifier(object):
 
         constrs = []
 
-        for i in reversed(xrange(0, size, 8)):
+        for i in reversed(range(0, size, 8)):
             bytes_exprs_1 = self.analyzer.get_memory_expr(addr + i/8, 8/8)
             bytes_exprs_2 = smtfunction.extract(src, i, 8)
 
@@ -327,7 +331,7 @@ class GadgetVerifier(object):
 
         constrs = []
 
-        for i in reversed(xrange(0, size, 8)):
+        for i in reversed(range(0, size, 8)):
             bytes_exprs_1 = smtfunction.extract(result, i, 8)
             bytes_exprs_2 = smtfunction.extract(dst, i, 8)
 
@@ -369,7 +373,7 @@ class GadgetVerifier(object):
 
         constrs = []
 
-        for i in reversed(xrange(0, size, 8)):
+        for i in reversed(range(0, size, 8)):
             bytes_exprs_1 = smtfunction.extract(result, i, 8)
             bytes_exprs_2 = smtfunction.extract(dst, i, 8)
 

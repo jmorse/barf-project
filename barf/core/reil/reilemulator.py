@@ -47,6 +47,7 @@ Byte addressable memory based on a dictionary.
 
 import logging
 import random
+import sys
 
 from barf.core.reil.reil import ReilImmediateOperand
 from barf.core.reil.reil import ReilMnemonic
@@ -56,6 +57,9 @@ from barf.utils.utils import extract_sign_bit
 from barf.utils.utils import extract_value
 from barf.utils.utils import insert_value
 from barf.utils.utils import twos_complement
+
+if sys.version_info[0] < 3:
+    range = xrange
 
 logger = logging.getLogger("reilemulator")
 
@@ -93,7 +97,7 @@ class ReilMemory(object):
         """
         value = 0x0
 
-        for i in xrange(0, size):
+        for i in range(0, size):
             value |= self._read_byte(address + i) << (i * 8)
 
         return value
@@ -112,7 +116,7 @@ class ReilMemory(object):
     def write(self, address, size, value):
         """Write arbitrary size content to memory.
         """
-        for i in xrange(0, size):
+        for i in range(0, size):
             self.__write_byte(address + i, (value >> (i * 8)) & 0xff)
 
     def __write_byte(self, address, value):
@@ -163,7 +167,7 @@ class ReilMemoryEx(ReilMemory):
         for addr in addr_candidates:
             match = True
 
-            for i in xrange(0, size):
+            for i in range(0, size):
                 byte_curr = (value >> (i * 8)) & 0xff
                 try:
                     match = self._memory[addr + i] == byte_curr
@@ -187,7 +191,7 @@ class ReilMemoryEx(ReilMemory):
         """
         value = 0x0
 
-        for i in xrange(0, size):
+        for i in range(0, size):
             addr = address + i
 
             if addr in self._memory:
@@ -206,7 +210,7 @@ class ReilMemoryEx(ReilMemory):
         """
         value = 0x0
 
-        for i in xrange(0, size):
+        for i in range(0, size):
             addr = address + i
 
             if addr in self.__memory_prev:
@@ -235,7 +239,7 @@ class ReilMemoryEx(ReilMemory):
     def write(self, address, size, value):
         """Write arbitrary size content to memory.
         """
-        for i in xrange(0, size):
+        for i in range(0, size):
             self.__write_byte(address + i, (value >> (i * 8)) & 0xff)
 
         self.__write_count += 1
@@ -838,17 +842,17 @@ class ReilEmulatorTainter(object):
     def get_memory_taint(self, address, size):
         tainted = False
 
-        for i in xrange(0, size):
+        for i in range(0, size):
             tainted = tainted or self.__taint_mem.get(address + i, False)
 
         return tainted
 
     def set_memory_taint(self, address, size, taint):
-        for i in xrange(0, size):
+        for i in range(0, size):
             self.__taint_mem[address + i] = taint
 
     def clear_memory_taint(self, address, size):
-        for i in xrange(0, size):
+        for i in range(0, size):
             self.__taint_mem[address + i] = False
 
     # Register taint methods
