@@ -199,7 +199,9 @@ class GadgetFinder(object):
             # TODO: Evaluate performance
             gad_found = False
             for gad in free_jump_gadgets:
-                if len(re.findall(gad, "".join(self._mem[addr:min(addr+4, end_address + 1)]))) > 0:     # TODO: Add thumb (+2)
+                sel = self._mem[addr:min(addr+4, end_address + 1)]
+                sel = [chr(x) for x in sel]
+                if len(re.findall(gad, "".join(sel))) > 0:     # TODO: Add thumb (+2)
                     gad_found = True
                     break
             if not gad_found:
