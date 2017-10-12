@@ -45,6 +45,7 @@ t2_0 (bvadd t0_1 t1_0))". It also send the following commands to the solver:
 
 """
 import logging
+import sys
 
 import barf.core.smt.smtfunction as smtfunction
 import barf.core.smt.smtsymbol as smtsymbol
@@ -53,6 +54,9 @@ from barf.core.reil.reil import ReilImmediateOperand
 from barf.core.reil.reil import ReilMnemonic
 from barf.core.reil.reil import ReilRegisterOperand
 from barf.utils.utils import VariableNamer
+
+if sys.version_info[0] < 3:
+    range = xrange
 
 logger = logging.getLogger(__name__)
 
@@ -523,7 +527,7 @@ class SmtTranslator(object):
 
         exprs = []
 
-        for i in reversed(xrange(0, oprnd3.size, 8)):
+        for i in reversed(range(0, oprnd3.size, 8)):
             exprs += [self._mem_curr[op1_var + i / 8] == smtfunction.extract(op3_var, i, 8)]
 
         return exprs + op3_var_constrs
@@ -537,7 +541,7 @@ class SmtTranslator(object):
         op1_var = self._translate_src_oprnd(oprnd1)
         op3_var = self._translate_src_oprnd(oprnd3)
 
-        for i in xrange(0, oprnd1.size, 8):
+        for i in range(0, oprnd1.size, 8):
             self._mem_curr[op3_var + i/8] = smtfunction.extract(op1_var, i, 8)
 
         # Memory versioning.
