@@ -22,6 +22,17 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+def _test_is_int2(v):
+    return True if type(v) in (int, long) else False
+
+def _test_is_int3(v):
+    return True if type(v) is int else False
+
+import sys
+if sys.version_info[0] < 3:
+    _test_is_int = _test_is_int2
+else:
+    _test_is_int = _test_is_int3
 
 def _cast_to_bool(value):
     if type(value) is bool:
@@ -33,7 +44,7 @@ def _cast_to_bool(value):
 
 
 def _cast_to_bitvec(value, size):
-    if type(value) in (int, long):
+    if _test_is_int(value):
         value = Constant(size, value)
 
     assert type(value) in (Constant, BitVec) and value.size == size
