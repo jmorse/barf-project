@@ -98,7 +98,7 @@ class Memory(object):
                 logger.warn("Address out of range: {:#x}".format(addr))
                 raise InvalidAddressError()
 
-            return str(chunck)
+            return bytes(chunck)
         elif isinstance(key, int) or isinstance(key, long):
             return chr(self._read_byte(key))
         else:

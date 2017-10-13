@@ -357,7 +357,7 @@ class ArmTranslator(Translator):
         self._translation_mode = value
 
     def _log_not_supported_instruction(self, instruction, reason="unknown"):
-        bytes_str = " ".join("%02x" % ord(b) for b in instruction.bytes)
+        bytes_str = " ".join("%02x" % b for b in instruction.bytes)
 
         logger.info(
             "Instruction not supported: %s (%s [%s]). Reason: %s",
@@ -368,7 +368,7 @@ class ArmTranslator(Translator):
         )
 
     def _log_translation_exception(self, instruction):
-        bytes_str = " ".join("%02x" % ord(b) for b in instruction.bytes)
+        bytes_str = " ".join("%02x" % b for b in instruction.bytes)
 
         logger.error(
             "Failed to translate arm to REIL: %s (%s)",
