@@ -222,7 +222,7 @@ class BinaryFile(object):
 
             raise Exception("Error loading file: {}".format(filename))
 
-        if signature[:4] == "\x7f\x45\x4c\x46":
+        if signature[:4] == b"\x7f\x45\x4c\x46":
             self._open_elf(filename)
         elif signature[:2] == b'\x4d\x5a':
             self._open_pe(filename)
@@ -266,20 +266,20 @@ class BinaryFile(object):
         #         m.add_vma(segment.header.p_vaddr, bytearray(segment.data()))
 
         sections = {
-            ".text": SectionRequest(".text")
+            b".text": SectionRequest(b".text")
         }
 
         BinaryFile._extract_section(sections, elffile)
-        text = sections[".text"]
+        text = sections[b".text"]
 
         if not text.found:
             raise Exception("Error loading ELF file.")
 
         sections = {
-            ".data": SectionRequest(".data"),
-            ".rodata": SectionRequest(".rodata"),
-            ".got": SectionRequest(".got"),
-            ".got.plt": SectionRequest(".got.plt")
+            b".data": SectionRequest(b".data"),
+            b".rodata": SectionRequest(b".rodata"),
+            b".got": SectionRequest(b".got"),
+            b".got.plt": SectionRequest(b".got.plt")
         }
 
         m = Memory()
@@ -322,7 +322,7 @@ class BinaryFile(object):
         found = False
 
         for idx, section in enumerate(pe.sections):
-            if section.Name.replace("\x00", ' ').strip() == ".text":
+            if section.Name.replace("\x00", ' ').strip() == b".text":
                 found = True
 
                 text_section_start = pe.OPTIONAL_HEADER.ImageBase + section.VirtualAddress
